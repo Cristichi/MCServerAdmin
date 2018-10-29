@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="MCServerAdmin.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MCServerAdmin"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:datos="using:DataAccessLib"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <CommandBar>
+            <AppBarButton x:Name="BtnNuevoJugador" Icon="AddFriend" Label="Registrar" Click="AppBarButton_Click_NuevoJugador"/>
+            <AppBarButton x:Name="BtnIrLista" Icon="ContactInfo" Label="Jugadores" Click="AppBarButton_Click_VerJugadores"/>
+            <AppBarSeparator/>
+            <AppBarButton x:Name="BtnBack" Icon="Back" Label="Atrás" Click="AppBarButton_Click_Back"/>
+            <AppBarButton x:Name="BtnForward" Icon="Forward" Label="Adelante" Click="AppBarButton_Click_Forward"/>
+        </CommandBar>
+
+        <Frame Grid.Row="1" x:Name="FramePrincipal" Navigated="FramePrincipal_Navigated"/>
+    </Grid>
+</Page>
