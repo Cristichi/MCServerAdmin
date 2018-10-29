@@ -26,27 +26,38 @@ namespace MCServerAdmin
 	public sealed partial class RegistrarNuevo : Page
 	{
 		ObservableCollection<String> cbItems = new ObservableCollection<String>();
+		ObservableCollection<Rango> cbRangos = new ObservableCollection<Rango>();
 		public RegistrarNuevo()
 		{
 			this.InitializeComponent();
 			cbItems.Add("Alex");
 			cbItems.Add("Steve");
 			cbItems.Add("Capitan Price");
+
+			cbRangos.Add(Rango.USUARIO);
+			cbRangos.Add(Rango.VIP);
+			cbRangos.Add(Rango.YOUTUBER);
+			cbRangos.Add(Rango.ADMIN);
+			cbRangos.Add(Rango.OWNER);
 		}
 
 		private void Button_Click_Registrar(object sender, RoutedEventArgs e)
 		{
-			if (CBSkin.SelectedIndex>=0)
+			if (CBSkin.SelectedIndex<0)
 			{
-				Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString().Replace(" ", "") + ".Skin.png");
+				CBSkin.PlaceholderText = "Elige una Skin";
+			}
+			else if (CBRango.SelectedIndex<0)
+			{
+				CBSkin.PlaceholderText = "Elige un Rango";
+			}
+			else
+			{
+				Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString().Replace(" ", "") + ".Skin.png", (Rango)(CBRango.SelectedItem));
 				AdminJugs.GetJugadores().Add(Nuevo);
 				AdminJugs.GuardarJugadores();
 				Frame.Navigate(typeof(NuevoJugRegistrado), Nuevo.Nombre);
 				Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
-			}
-			else
-			{
-				CBSkin.PlaceholderText = "Elige una Skin";
 			}
 		}
 

@@ -27,7 +27,7 @@
 
         <StackPanel x:Name="SPHerramientasJug" Grid.RowSpan="2" Visibility="Collapsed" MaxWidth="300">
             <TextBlock x:Name="TxtNombre" HorizontalAlignment="Left" Style="{ThemeResource SubheaderTextBlockStyle}" TextWrapping="Wrap"/>
-            <TextBlock x:Name="TxtSkin" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
+            <TextBlock x:Name="TxtRango" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
             <Image x:Name="ImgImagen" Width="250" Height="256"/>
             <MenuFlyoutSeparator/>
             <AppBarButton x:Name="BtnBorrarJug" Content="Borrar" HorizontalAlignment="Stretch" Click="BtnBorrarJug_Click"/>

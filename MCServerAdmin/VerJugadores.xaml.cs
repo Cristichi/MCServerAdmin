@@ -35,8 +35,8 @@ namespace MCServerAdmin
 			{
 				Jugador Jug = (Jugador) e.AddedItems.First();
 				SPHerramientasJug.Visibility = Visibility.Visible;
-				TxtNombre.Text = Jug.Nombre;
-				//TxtSkin.Text = Jug.Skin;
+				TxtNombre.Text = "Jugador: "+Jug.Nombre;
+				TxtRango.Text = "Rango: "+Jug.Rango.ToString();
 				ImgImagen.Source = new BitmapImage(new Uri("ms-appx:///"+Jug.Skin));
 			}
 			else

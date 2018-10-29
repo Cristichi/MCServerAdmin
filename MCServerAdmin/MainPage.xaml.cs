@@ -37,33 +37,44 @@ namespace MCServerAdmin
 			using (SqliteConnection db = new SqliteConnection("Filename="+RUTA_DB))
 			{
 				db.Open();
+				/* Pruebas */
+				try { 
+					String limpiar = "drop table Jugadores";
 
+					SqliteCommand exeLimpiar = new SqliteCommand(limpiar, db);
+
+					exeLimpiar.ExecuteReader();
+				}
+				catch
+				{
+
+				}
+					String tableCommand = "CREATE TABLE IF NOT EXISTS Jugadores (" +
+											"Id INTEGER PRIMARY KEY, " +
+											"Nombre nvarchar(2048) NOT NULL, " +
+											"Skin nvarchar(2048) NOT NULL," +
+											"Rango byte NOT NULL)";
+
+					SqliteCommand createTable = new SqliteCommand(tableCommand, db);
+
+					createTable.ExecuteReader();
+
+					String sujetosDePrueba = "INSERT INTO Jugadores VALUES(0, 'Cristichi', 'CapitanPrice', '4')";
+
+					SqliteCommand insertSujetos = new SqliteCommand(sujetosDePrueba, db);
+					insertSujetos.ExecuteReader();
+				
+				/* Para probar datos guardados*
 				String tableCommand = "CREATE TABLE IF NOT EXISTS Jugadores (" +
-					"Id INTEGER PRIMARY KEY, " +
-					"Nombre nvarchar(2048) NOT NULL, " +
-					"Skin nvarchar(2048))";
+						"Id INTEGER PRIMARY KEY, " +
+						"Nombre nvarchar(2048) NOT NULL, " +
+						"Skin nvarchar(2048)) NOT NULL," +
+						"Rango byte NOT NULL";
 
 				SqliteCommand createTable = new SqliteCommand(tableCommand, db);
 
 				createTable.ExecuteReader();
-
-				/*
-				try
-				{
-					String limpiar = "delete from Jugadores";
-
-					SqliteCommand exeLimpiar = new SqliteCommand(limpiar, db);
-					exeLimpiar.ExecuteReader();
-
-					String sujetosDePrueba = "INSERT INTO Jugadores VALUES(0, 'Cristichi', 'CapitanPrice')";
-
-					SqliteCommand insertSujetos = new SqliteCommand(sujetosDePrueba, db);
-					insertSujetos.ExecuteReader();
-				}
-				catch(Exception)
-				{
-
-				}*/
+				/**/
 
 				db.Close();
 			}
