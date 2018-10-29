@@ -27,7 +27,7 @@
 
         <ComboBox x:Name="CBSkin" ItemsSource="{x:Bind cbItems}" Grid.ColumnSpan="2" Grid.Row="2" PlaceholderText="Skin" HorizontalAlignment="Center" FontSize="60"/>
 
-        <ComboBox x:Name="CBRango" ItemsSource="{x:Bind cbItems}" Grid.ColumnSpan="2" Grid.Row="3" PlaceholderText="Rango" HorizontalAlignment="Center" FontSize="60"/>
+        <ComboBox x:Name="CBRango" ItemsSource="{x:Bind cbRangos}" Grid.ColumnSpan="2" Grid.Row="3" PlaceholderText="Rango" HorizontalAlignment="Center" FontSize="60"/>
 
         <Button Grid.Row="4" HorizontalAlignment="Stretch" Margin="10" Click="Button_Click_Cancelar">
             <StackPanel Orientation="Horizontal">

@@ -49,7 +49,7 @@ namespace MCServerAdmin
 			}
 			else if (CBRango.SelectedIndex<0)
 			{
-				CBSkin.PlaceholderText = "Elige un Rango";
+				CBRango.PlaceholderText = "Elige un Rango";
 			}
 			else
 			{

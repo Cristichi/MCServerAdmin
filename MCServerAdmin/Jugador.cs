@@ -132,7 +132,7 @@ namespace MCServerAdmin.datos
 					int i = 0;
 					foreach (Jugador jug in Lista)
 					{
-						reescribir += "insert into Jugadores values(" + i++ + ", '" + jug.Nombre + "', '" + jug.Skin + "', '" + GetIdRango(jug.Rango) + ");";
+						reescribir += "insert into Jugadores values(" + i++ + ", '" + jug.Nombre + "', '" + jug.Skin + "', '" + GetIdRango(jug.Rango) + "');";
 					}
 
 					SqliteCommand reescribirExe = new SqliteCommand(reescribir, db);
