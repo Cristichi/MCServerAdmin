@@ -33,11 +33,16 @@ namespace MCServerAdmin
 		{
 			if (e.AddedItems.Count>0)
 			{
-				Jugador Jug = (Jugador) e.AddedItems.First();
+				Jugador jug = (Jugador) e.AddedItems.First();
 				SPHerramientasJug.Visibility = Visibility.Visible;
-				TxtNombre.Text = "Jugador: "+Jug.Nombre;
-				TxtRango.Text = "Rango: "+Jug.Rango.ToString();
-				ImgImagen.Source = new BitmapImage(new Uri("ms-appx:///"+Jug.Skin));
+				string nombre = jug.Nombre;
+				if (nombre.Length>30)
+				{
+					nombre = nombre.Substring(0,27)+"...";
+				}
+				TxtNombre.Text = "Jugador: "+nombre;
+				TxtRango.Text = "Rango: "+jug.Rango.ToString();
+				ImgImagen.Source = new BitmapImage(new Uri("ms-appx:///"+jug.Skin));
 			}
 			else
 			{
@@ -91,6 +96,41 @@ namespace MCServerAdmin
 			{
 				// Use args.QueryText to determine what to do.
 			}
+		}
+
+		private void Grid_Loaded(object sender, RoutedEventArgs e)
+		{
+			SolidColorBrush borde = new SolidColorBrush(Windows.UI.Color.FromArgb(0, 0, 0, 0));
+			Grid grid = (Grid)sender;
+			foreach (UIElement el in grid.Children)
+			{
+				if (el is TextBlock txt)
+				{
+					if (txt.Name.Equals("TxtCadaRango"))
+					{
+						switch (txt.Text)
+						{
+							case "USUARIO":
+								borde = new SolidColorBrush(Windows.UI.Color.FromArgb(200, 200, 200, 200));
+								break;
+							case "VIP":
+								borde = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 155, 130, 0));
+								break;
+							case "YOUTUBER":
+								borde = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 155, 0, 0));
+								break;
+							case "ADMIN":
+								borde = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 0, 0));
+								break;
+							case "OWNER":
+								borde = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 255, 0));
+								break;
+						}
+					}
+					grid.Background = borde;
+				}
+			}
+
 		}
 	}
 }

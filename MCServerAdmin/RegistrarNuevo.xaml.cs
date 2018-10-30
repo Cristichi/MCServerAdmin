@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,15 +31,29 @@ namespace MCServerAdmin
 		public RegistrarNuevo()
 		{
 			this.InitializeComponent();
-			cbItems.Add("Alex");
-			cbItems.Add("Steve");
-			cbItems.Add("Capitan Price");
+			InicializarComboBox();
 
 			cbRangos.Add(Rango.USUARIO);
 			cbRangos.Add(Rango.VIP);
 			cbRangos.Add(Rango.YOUTUBER);
 			cbRangos.Add(Rango.ADMIN);
 			cbRangos.Add(Rango.OWNER);
+		}
+
+		private async void InicializarComboBox()
+		{
+			StorageFolder appInstalledFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+			StorageFolder assets = await appInstalledFolder.GetFolderAsync("Assets");
+			IReadOnlyCollection<StorageFile> files = await assets.GetFilesAsync();
+			foreach (StorageFile archivo in files)
+			{
+				string nombre = archivo.Name;
+				if (nombre.EndsWith(".Skin.png") || nombre.EndsWith(".Skin.jpg"))
+				{
+					cbItems.Add(nombre.Substring(0, nombre.Length-9));
+				}
+			}
+
 		}
 
 		private void Button_Click_Registrar(object sender, RoutedEventArgs e)
@@ -53,7 +68,7 @@ namespace MCServerAdmin
 			}
 			else
 			{
-				Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString().Replace(" ", "") + ".Skin.png", (Rango)(CBRango.SelectedItem));
+				Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString() + ".Skin.png", (Rango)(CBRango.SelectedItem));
 				AdminJugs.GetJugadores().Add(Nuevo);
 				AdminJugs.GuardarJugadores();
 				Frame.Navigate(typeof(NuevoJugRegistrado), Nuevo.Nombre);

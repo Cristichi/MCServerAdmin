@@ -36,14 +36,18 @@
         <GridView x:Name="GVVerJugs" Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind ListaJugadores}" Margin="0,20,20,20" SelectionChanged="GridView_SelectionChanged">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="datos:Jugador">
-                    <Grid Background="LightGray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5">
+                    <Grid Loaded="Grid_Loaded" Background="LightGray" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
                         <Image Source="{x:Bind Skin}" Width="125" Height="128" Margin="5"/>
-                        <TextBlock Grid.Row="1" Text="{x:Bind Nombre}" Foreground="Black" TextWrapping="WrapWholeWords" Margin="10"/>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto">
+                            <TextBlock Text="{x:Bind Nombre}" Foreground="Black" TextWrapping="NoWrap" Margin="5,5,5,0"/>
+                        </ScrollViewer>
+                        <TextBlock x:Name="TxtCadaRango" Grid.Row="2" Text="{x:Bind Rango}" Foreground="Black" TextWrapping="WrapWholeWords" Margin="10,5,10,0"/>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
