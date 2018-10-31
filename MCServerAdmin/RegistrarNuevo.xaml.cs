@@ -28,6 +28,8 @@ namespace MCServerAdmin
 	{
 		ObservableCollection<String> cbItems = new ObservableCollection<String>();
 		ObservableCollection<Rango> cbRangos = new ObservableCollection<Rango>();
+
+		int index;
 		public RegistrarNuevo()
 		{
 			this.InitializeComponent();
@@ -38,6 +40,8 @@ namespace MCServerAdmin
 			cbRangos.Add(Rango.YOUTUBER);
 			cbRangos.Add(Rango.ADMIN);
 			cbRangos.Add(Rango.OWNER);
+
+			index = -1;
 		}
 
 		private async void InicializarComboBox()
@@ -68,8 +72,18 @@ namespace MCServerAdmin
 			}
 			else
 			{
-				Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString() + ".Skin.png", (Rango)(CBRango.SelectedItem));
-				AdminJugs.GetJugadores().Add(Nuevo);
+				DateTime fecha = DPFecha.Date.UtcDateTime;
+				Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString() + ".Skin.png", (Rango)(CBRango.SelectedItem),
+					Int32.Parse(TxtDinero.Text), fecha.Day, fecha.Month, fecha.Year);
+				if (index<0)
+				{
+					AdminJugs.GetJugadores().Add(Nuevo);
+				}
+				else
+				{
+					AdminJugs.GetJugadores().RemoveAt(index);
+					AdminJugs.GetJugadores().Insert(index, Nuevo);
+				}
 				AdminJugs.GuardarJugadores();
 				Frame.Navigate(typeof(NuevoJugRegistrado), Nuevo.Nombre);
 				Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
@@ -86,6 +100,39 @@ namespace MCServerAdmin
 			{
 				Frame.Navigate(typeof(VerJugadores));
 			}
+		}
+
+		protected override void OnNavigatedTo(NavigationEventArgs e)
+		{
+				string index = e.Parameter as string;
+				this.index = Int32.Parse(index);
+				Jugador jug = AdminJugs.GetJugadores().ElementAt(this.index);
+				TxtNombre.Text = jug.Nombre;
+				try
+				{
+					CBSkin.SelectedItem = jug.Skin;
+				}
+				catch
+				{
+				}
+				try
+				{
+					CBRango.SelectedItem = jug.Rango;
+				}
+				catch
+				{
+				}
+
+				try
+				{
+					DPFecha.Date = jug.FechaIngreso;
+				}
+				catch
+				{
+				}
+
+				TxtDinero.Text = jug.DineroVirtual + "";
+
 		}
 	}
 }

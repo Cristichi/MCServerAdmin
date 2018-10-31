@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DataAccessLib;
 using Microsoft.Data.Sqlite;
 
@@ -9,26 +10,43 @@ namespace MCServerAdmin.datos
 		public string Nombre { get; set; }
 		public string Skin { get; set; }
 		public Rango Rango { get; set; }
+		public int DineroVirtual { get; set; }
+		public DateTime FechaIngreso { get; set; }
 
 		public Jugador()
 		{
 			this.Nombre = "Jugador Autogenerado";
 			Skin = "Assets/PorDefecto.Skin.png";
 			Rango = Rango.USUARIO;
+			DineroVirtual = 0;
+			FechaIngreso = DateTime.Today;
 		}
 
-		public Jugador(string nombre, Rango rango)
+		public Jugador(string nombre, Rango rango, int dinero)
 		{
 			this.Nombre = nombre;
 			Skin = "Assets/PorDefecto.Skin.png";
 			Rango = rango;
+			DineroVirtual = dinero;
+			FechaIngreso = DateTime.Today;
 		}
 
-		public Jugador(string Nombre, string Skin, Rango rango)
+		public Jugador(string Nombre, string Skin, Rango rango, int dinero)
 		{
 			this.Nombre = Nombre;
 			this.Skin = Skin;
 			Rango = rango;
+			DineroVirtual = dinero;
+			FechaIngreso = DateTime.Today;
+		}
+
+		public Jugador(string Nombre, string Skin, Rango rango, int dinero, int dia, int mes, int year)
+		{
+			this.Nombre = Nombre;
+			this.Skin = Skin;
+			Rango = rango;
+			DineroVirtual = dinero;
+			FechaIngreso = new DateTime(year, mes, dia);
 		}
 
 		public override string ToString()
@@ -105,7 +123,10 @@ namespace MCServerAdmin.datos
 
 					while (query.Read())
 					{
-						Lista.Add(new Jugador(query.GetString(1), query.GetString(2), GetRango(query.GetByte(3))));
+						Lista.Add(new Jugador(
+							query.GetString(1), query.GetString(2), GetRango(query.GetByte(3)),
+							query.GetInt32(4), query.GetInt32(5), query.GetInt32(6), query.GetInt32(7)
+							));
 					}
 					db.Close();
 				}
@@ -132,7 +153,8 @@ namespace MCServerAdmin.datos
 					int i = 0;
 					foreach (Jugador jug in Lista)
 					{
-						reescribir += "insert into Jugadores values(" + i++ + ", '" + jug.Nombre + "', '" + jug.Skin + "', '" + GetIdRango(jug.Rango) + "');";
+						reescribir += "insert into Jugadores values(" + i++ + ", '" + jug.Nombre + "', '" + jug.Skin + "', '" + GetIdRango(jug.Rango) + "', " +
+							jug.DineroVirtual + ", " + jug.FechaIngreso.Day + ", " + jug.FechaIngreso.Month + ", " + jug.FechaIngreso.Year + ");";
 					}
 
 					SqliteCommand reescribirExe = new SqliteCommand(reescribir, db);

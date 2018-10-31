@@ -37,7 +37,7 @@ namespace MCServerAdmin
 			using (SqliteConnection db = new SqliteConnection("Filename="+RUTA_DB))
 			{
 				db.Open();
-				/* Pruebas *
+				/* Pruebas */
 				try { 
 					String limpiar = "drop table Jugadores";
 
@@ -53,18 +53,23 @@ namespace MCServerAdmin
 											"Id INTEGER PRIMARY KEY, " +
 											"Nombre nvarchar(2048) NOT NULL, " +
 											"Skin nvarchar(2048) NOT NULL," +
-											"Rango byte NOT NULL)";
+											"Rango byte NOT NULL," +
+											"Dinero int NOT NULL," +
+											"DiaIngreso int NOT NULL," +
+											"MesIngreso int NOT NULL," +
+											"YearIngreso int NOT NULL" +
+											")";
 
 					SqliteCommand createTable = new SqliteCommand(tableCommand, db);
 
 					createTable.ExecuteReader();
 
-					String sujetosDePrueba = "INSERT INTO Jugadores VALUES(0, 'Cristichi', 'CapitanPrice', '4')";
+					String sujetosDePrueba = "INSERT INTO Jugadores VALUES(0, 'Cristichi', 'Assets/Capitan Price.Skin.png', '4', '935', '6', '4', '1997')";
 
 					SqliteCommand insertSujetos = new SqliteCommand(sujetosDePrueba, db);
 					insertSujetos.ExecuteReader();
 				
-				/**/
+				/**
 				String tableCommand = "CREATE TABLE IF NOT EXISTS Jugadores (" +
 						"Id INTEGER PRIMARY KEY, " +
 						"Nombre nvarchar(2048) NOT NULL, " +

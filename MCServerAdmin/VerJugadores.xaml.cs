@@ -42,6 +42,8 @@ namespace MCServerAdmin
 				}
 				TxtNombre.Text = "Jugador: "+nombre;
 				TxtRango.Text = "Rango: "+jug.Rango.ToString();
+				TxtFecha.Text = "Se unió el día " + jug.FechaIngreso.Day + "/" + jug.FechaIngreso.Month + "/" + jug.FechaIngreso.Year;
+				TxtDinero.Text = "Tiene " + jug.DineroVirtual + " diamantes en su cuenta.";
 				ImgImagen.Source = new BitmapImage(new Uri("ms-appx:///"+jug.Skin));
 			}
 			else
@@ -56,6 +58,12 @@ namespace MCServerAdmin
 			AdminJugs.GuardarJugadores();
 			GVVerJugs.ItemsSource = AdminJugs.GetJugadores();
 			Frame.Navigate(typeof(VerJugadores));
+			Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+		}
+
+		private void BtnEditarJug_Editar(object sender, RoutedEventArgs e)
+		{
+			Frame.Navigate(typeof(RegistrarNuevo), GVVerJugs.SelectedIndex);
 			Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
 		}
 

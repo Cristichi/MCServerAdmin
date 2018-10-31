@@ -28,9 +28,14 @@
         <StackPanel x:Name="SPHerramientasJug" Grid.RowSpan="2" Visibility="Collapsed" MaxWidth="300">
             <TextBlock x:Name="TxtNombre" HorizontalAlignment="Left" Style="{ThemeResource SubheaderTextBlockStyle}" TextWrapping="Wrap"/>
             <TextBlock x:Name="TxtRango" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
+            <TextBlock x:Name="TxtFecha" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
+            <TextBlock x:Name="TxtDinero" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
             <Image x:Name="ImgImagen" Width="250" Height="256"/>
             <MenuFlyoutSeparator/>
-            <AppBarButton x:Name="BtnBorrarJug" Content="Borrar" HorizontalAlignment="Stretch" Click="BtnBorrarJug_Click"/>
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton x:Name="BtnBorrarJug" Content="Borrar" HorizontalAlignment="Stretch" Click="BtnBorrarJug_Click"/>
+                <AppBarButton x:Name="BtnEditarJug" Content="Editar" HorizontalAlignment="Stretch" Click="BtnEditarJug_Editar"/>
+            </StackPanel>
         </StackPanel>
 
         <GridView x:Name="GVVerJugs" Grid.Row="1" Grid.Column="1" ItemsSource="{x:Bind ListaJugadores}" Margin="0,20,20,20" SelectionChanged="GridView_SelectionChanged">
