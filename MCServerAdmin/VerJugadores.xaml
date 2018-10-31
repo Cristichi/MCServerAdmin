@@ -44,7 +44,7 @@
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
                         <Image Source="{x:Bind Skin}" Width="125" Height="128" Margin="5"/>
-                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto">
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" HorizontalScrollMode="Auto" Padding="15">
                             <TextBlock Text="{x:Bind Nombre}" Foreground="Black" TextWrapping="NoWrap" Margin="5,5,5,0"/>
                         </ScrollViewer>
                         <TextBlock x:Name="TxtCadaRango" Grid.Row="2" Text="{x:Bind Rango}" Foreground="Black" TextWrapping="WrapWholeWords" Margin="10,5,10,0"/>

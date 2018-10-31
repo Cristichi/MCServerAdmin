@@ -122,6 +122,7 @@
   <ItemGroup>
     <Content Include="Assets\Alex.Skin.png" />
     <Content Include="Assets\Capitan Price.Skin.png" />
+    <Content Include="Assets\minecraft_logo.png" />
     <Content Include="Assets\Testeo muy Fuerte.Skin.png" />
     <Content Include="Assets\Steve.Skin.png" />
     <Content Include="Properties\Default.rd.xml" />

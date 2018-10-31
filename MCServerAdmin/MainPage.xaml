@@ -14,14 +14,17 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+        
         <CommandBar>
+            <AppBarButton x:Name="BtnEditarJugador" Icon="Edit" Label="Editar" Click="AppBarButton_Click_EditarJugador"/>
             <AppBarButton x:Name="BtnNuevoJugador" Icon="AddFriend" Label="Registrar" Click="AppBarButton_Click_NuevoJugador"/>
             <AppBarButton x:Name="BtnIrLista" Icon="ContactInfo" Label="Jugadores" Click="AppBarButton_Click_VerJugadores"/>
             <AppBarSeparator/>
             <AppBarButton x:Name="BtnBack" Icon="Back" Label="Atrás" Click="AppBarButton_Click_Back"/>
             <AppBarButton x:Name="BtnForward" Icon="Forward" Label="Adelante" Click="AppBarButton_Click_Forward"/>
         </CommandBar>
+
+        <Image Source="Assets/minecraft_logo.png" Grid.Row="1" Width="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"/>
 
         <Frame Grid.Row="1" x:Name="FramePrincipal" Navigated="FramePrincipal_Navigated"/>
     </Grid>
