@@ -121,9 +121,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Alex.Skin.png" />
+    <Content Include="Assets\Calaboncio.Skin.png" />
     <Content Include="Assets\Capitan Price.Skin.png" />
+    <Content Include="Assets\Entrenador PKMN.Skin.png" />
+    <Content Include="Assets\Entrenadora PKMN.Skin.png" />
+    <Content Include="Assets\Gato con Botas.Skin.png" />
+    <Content Include="Assets\Herobrine.Skin.png" />
     <Content Include="Assets\minecraft_logo.png" />
-    <Content Include="Assets\Testeo muy Fuerte.Skin.png" />
+    <Content Include="Assets\Pacheco.Skin.png" />
     <Content Include="Assets\Steve.Skin.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
