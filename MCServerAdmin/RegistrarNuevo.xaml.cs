@@ -28,8 +28,8 @@ namespace MCServerAdmin
 	{
 		ObservableCollection<String> cbItems = new ObservableCollection<String>();
 		ObservableCollection<Rango> cbRangos = new ObservableCollection<Rango>();
-
-		int index;
+        
+		int index = -1;
 		public RegistrarNuevo()
 		{
 			this.InitializeComponent();
@@ -40,9 +40,8 @@ namespace MCServerAdmin
 			cbRangos.Add(Rango.YOUTUBER);
 			cbRangos.Add(Rango.ADMIN);
 			cbRangos.Add(Rango.OWNER);
-
-			index = -1;
-		}
+            
+        }
 
 		private async void InicializarComboBox()
 		{
@@ -58,7 +57,31 @@ namespace MCServerAdmin
 				}
 			}
 
-		}
+            if (index >= 0)
+            {
+                try
+                {
+                    Jugador jug = AdminJugs.GetJugadores().ElementAt(index);
+                    bool elegida = false;
+                    int i;
+                    for (i = 0; i < cbItems.Count && !elegida; i++)
+                    {
+                        if (jug.Skin.Contains(cbItems.ElementAt(i)))
+                        {
+                            CBSkin.SelectedIndex = i;
+                            elegida = true;
+                        }
+                    }
+                    if (!elegida)
+                    {
+                        CBSkin.PlaceholderText = "No se pudo autoseleccionar la skin";
+                    }
+                }
+                catch
+                {
+                }
+            }
+        }
 
 		private void Button_Click_Registrar(object sender, RoutedEventArgs e)
 		{
@@ -79,12 +102,20 @@ namespace MCServerAdmin
 				DateTime fecha = DPFecha.Date.UtcDateTime;
                 try
                 {
-                    int dinero = 0;
-                    try
+                    int dinero = -1;
+                    if (TxtDinero.Text.Equals(""))
                     {
-                        Int32.Parse(TxtDinero.Text);
+                        dinero = 0;
                     }
-                    catch {}
+                    else
+                    {
+                        try
+                        {
+                            dinero = Int32.Parse(TxtDinero.Text);
+                        }
+                        catch { }
+                    }
+                    
                     Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString() + ".Skin.png", (Rango)(CBRango.SelectedItem),
                     dinero, fecha.Day, fecha.Month, fecha.Year);
                     if (index < 0)
@@ -129,27 +160,7 @@ namespace MCServerAdmin
                 //Editando jugador
                 Jugador jug = AdminJugs.GetJugadores().ElementAt(index);
                 TxtNombre.Text = jug.Nombre;
-                try
-                {
-                    ItemCollection ic = CBSkin.Items;
-                    bool elegida = false;
-                    int i;
-                    for(i=0; i<ic.Count && !elegida; i++)
-                    {
-                        if (jug.Skin.Contains(ic.ElementAt(i).ToString()))
-                        {
-                            CBSkin.SelectedIndex = i;
-                            elegida = true;
-                        }
-                    }
-                    if (!elegida)
-                    {
-                        CBSkin.PlaceholderText = "No se ha encontrado la skin "+jug.Skin+" "+i;
-                    }
-                }
-                catch
-                {
-                }
+
                 try
                 {
                     CBRango.SelectedItem = jug.Rango;
@@ -167,11 +178,11 @@ namespace MCServerAdmin
                 }
 
                 TxtDinero.Text = jug.DineroVirtual + "";
+                BtnAgregar.Content = "Aplicar";
             }
             catch
             {
                 //Nuevo jugador!
-                BtnAgregar.Content = "Aplicar";
             }
 
 
