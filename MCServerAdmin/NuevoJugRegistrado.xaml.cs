@@ -31,8 +31,10 @@ namespace MCServerAdmin
 		{
 			try
 			{
-				string Nombre = e.Parameter as string;
-				TxtNuevoJug.Text = "Se ha registrado a " + Nombre + " correctamente.";
+				string nombre = e.Parameter as string;
+                bool nuevo = nombre.Substring(0,1)=="0"?true:false;
+                nombre = nombre.Substring(1);
+				TxtNuevoJug.Text = "Se ha "+(nuevo?"registrado":"editado")+" a " + nombre + " correctamente.";
 			}
 			catch(NullReferenceException)
 			{

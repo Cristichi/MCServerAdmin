@@ -38,7 +38,7 @@
                     <TextBlock Text="Cancelar"/>
                 </StackPanel>
             </Button>
-            <Button Margin="16" Click="Button_Click_Registrar">
+            <Button x:Name="BtnAgregar" Margin="16" Click="Button_Click_Registrar">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;"/>
                     <TextBlock Text="Agregar"/>

@@ -62,7 +62,11 @@ namespace MCServerAdmin
 
 		private void Button_Click_Registrar(object sender, RoutedEventArgs e)
 		{
-			if (CBSkin.SelectedIndex<0)
+            if (TxtNombre.Text.Trim().Equals(""))
+            {
+                TxtNombre.PlaceholderText = "Escribe un nombre";
+            }
+			else if (CBSkin.SelectedIndex<0)
 			{
 				CBSkin.PlaceholderText = "Elige una Skin";
 			}
@@ -73,20 +77,34 @@ namespace MCServerAdmin
 			else
 			{
 				DateTime fecha = DPFecha.Date.UtcDateTime;
-				Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString() + ".Skin.png", (Rango)(CBRango.SelectedItem),
-					Int32.Parse(TxtDinero.Text), fecha.Day, fecha.Month, fecha.Year);
-				if (index<0)
-				{
-					AdminJugs.GetJugadores().Add(Nuevo);
-				}
-				else
-				{
-					AdminJugs.GetJugadores().RemoveAt(index);
-					AdminJugs.GetJugadores().Insert(index, Nuevo);
-				}
-				AdminJugs.GuardarJugadores();
-				Frame.Navigate(typeof(NuevoJugRegistrado), Nuevo.Nombre);
-				Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+                try
+                {
+                    int dinero = 0;
+                    try
+                    {
+                        Int32.Parse(TxtDinero.Text);
+                    }
+                    catch {}
+                    Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString() + ".Skin.png", (Rango)(CBRango.SelectedItem),
+                    dinero, fecha.Day, fecha.Month, fecha.Year);
+                    if (index < 0)
+                    {
+                        AdminJugs.GetJugadores().Add(Nuevo);
+                    }
+                    else
+                    {
+                        AdminJugs.GetJugadores().RemoveAt(index);
+                        AdminJugs.GetJugadores().Insert(index, Nuevo);
+                    }
+                    AdminJugs.GuardarJugadores();
+                    Frame.Navigate(typeof(NuevoJugRegistrado), (index < 0 ? 0 : 1) + Nuevo.Nombre);
+                    Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+                }
+                catch(Exception error)
+                {
+                    BtnAgregar.Background = new SolidColorBrush(Windows.UI.Color.FromArgb(255,255,0,0));
+                    BtnAgregar.Content = error.Message;
+                }
 			}
 		}
 
@@ -103,35 +121,59 @@ namespace MCServerAdmin
 		}
 
 		protected override void OnNavigatedTo(NavigationEventArgs e)
-		{
-				string index = e.Parameter as string;
-				this.index = Int32.Parse(index);
-				Jugador jug = AdminJugs.GetJugadores().ElementAt(this.index);
-				TxtNombre.Text = jug.Nombre;
-				try
-				{
-					CBSkin.SelectedItem = jug.Skin;
-				}
-				catch
-				{
-				}
-				try
-				{
-					CBRango.SelectedItem = jug.Rango;
-				}
-				catch
-				{
-				}
+        {
+            try
+            {
+                index = Int32.Parse(e.Parameter.ToString());
 
-				try
-				{
-					DPFecha.Date = jug.FechaIngreso;
-				}
-				catch
-				{
-				}
+                //Editando jugador
+                Jugador jug = AdminJugs.GetJugadores().ElementAt(index);
+                TxtNombre.Text = jug.Nombre;
+                try
+                {
+                    ItemCollection ic = CBSkin.Items;
+                    bool elegida = false;
+                    int i;
+                    for(i=0; i<ic.Count && !elegida; i++)
+                    {
+                        if (jug.Skin.Contains(ic.ElementAt(i).ToString()))
+                        {
+                            CBSkin.SelectedIndex = i;
+                            elegida = true;
+                        }
+                    }
+                    if (!elegida)
+                    {
+                        CBSkin.PlaceholderText = "No se ha encontrado la skin "+jug.Skin+" "+i;
+                    }
+                }
+                catch
+                {
+                }
+                try
+                {
+                    CBRango.SelectedItem = jug.Rango;
+                }
+                catch
+                {
+                }
 
-				TxtDinero.Text = jug.DineroVirtual + "";
+                try
+                {
+                    DPFecha.Date = jug.FechaIngreso;
+                }
+                catch
+                {
+                }
+
+                TxtDinero.Text = jug.DineroVirtual + "";
+            }
+            catch
+            {
+                //Nuevo jugador!
+                BtnAgregar.Content = "Aplicar";
+            }
+
 
 		}
 	}
