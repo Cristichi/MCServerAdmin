@@ -43,8 +43,31 @@ namespace MCServerAdmin
 				TxtNombre.Text = "Jugador: "+nombre;
 				TxtRango.Text = "Rango: "+jug.Rango.ToString();
 				TxtFecha.Text = "Se unió el día " + jug.FechaIngreso.Day + "/" + jug.FechaIngreso.Month + "/" + jug.FechaIngreso.Year;
-				TxtDinero.Text = "Tiene " + jug.DineroVirtual + " diamantes en su cuenta.";
-				ImgImagen.Source = new BitmapImage(new Uri("ms-appx:///"+jug.Skin));
+                if (jug.Rango.Equals(Rango.ADMIN) || jug.Rango.Equals(Rango.OWNER))
+                {
+                    TxtDinero.Text = "Tiene acceso al modo creativo.";
+                }
+                else if (jug.DineroVirtual == 0)
+                {
+                    TxtDinero.Text = "No tiene diamantes.";
+                }
+                else if (jug.DineroVirtual == 1)
+                {
+                    TxtDinero.Text = "Tiene 1 diamante en su cuenta.";
+                }
+                else if (jug.DineroVirtual > 0)
+                {
+                    TxtDinero.Text = "Tiene " + jug.DineroVirtual + " diamantes en su cuenta.";
+                }
+                else if (jug.DineroVirtual == -1)
+                {
+                    TxtDinero.Text = "Tiene que pagar 1 diamante.";
+                }
+                else
+                {
+                    TxtDinero.Text = "Tiene que pagar " + -jug.DineroVirtual + " diamantes.";
+                }
+                ImgImagen.Source = new BitmapImage(new Uri("ms-appx:///"+jug.Skin));
 			}
 			else
 			{
