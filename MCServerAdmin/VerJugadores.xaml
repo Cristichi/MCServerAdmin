@@ -9,6 +9,31 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Margin="20">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="600" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ASBBuscar.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="550" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ImgImagen.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -19,7 +44,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Right">
-            <AutoSuggestBox x:Name="ASBBuscar" PlaceholderText="Buscar..." Width="250" QueryIcon="Find"
+            <AutoSuggestBox x:Name="ASBBuscar" PlaceholderText="Buscar..." Width="250" QueryIcon="Find" Visibility="Collapsed"
                 TextChanged="AutoSuggestBox_TextChanged"
                 QuerySubmitted="AutoSuggestBox_QuerySubmitted"
                 SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
@@ -30,7 +55,7 @@
             <TextBlock x:Name="TxtRango" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
             <TextBlock x:Name="TxtFecha" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
             <TextBlock x:Name="TxtDinero" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
-            <Image x:Name="ImgImagen" Width="250" Height="256"/>
+            <Image x:Name="ImgImagen" Width="250" Height="256" Visibility="Collapsed"/>
             <MenuFlyoutSeparator/>
             <StackPanel Orientation="Horizontal">
                 <AppBarButton x:Name="BtnBorrarJug" Content="Borrar" HorizontalAlignment="Stretch" Click="BtnBorrarJug_Click"/>

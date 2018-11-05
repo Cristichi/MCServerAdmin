@@ -129,6 +129,7 @@
     <Content Include="Assets\Herobrine.Skin.png" />
     <Content Include="Assets\minecraft_logo.png" />
     <Content Include="Assets\Pacheco.Skin.png" />
+    <Content Include="Assets\Skin_Placeholder.png" />
     <Content Include="Assets\Steve.Skin.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

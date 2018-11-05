@@ -8,49 +8,67 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        
-        <Image x:Name="ImgSkin" Grid.RowSpan="7" Width="250" Height="256" VerticalAlignment="Center"/>
+    <ScrollViewer VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Grid Margin="10">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup>
+                    <VisualState>
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="900" />
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="TxtNombre.Width" Value="600"/>
+                            <Setter Target="CBSkin.Width" Value="600"/>
+                            <Setter Target="CBRango.Width" Value="600"/>
+                            <Setter Target="TxtDinero.Width" Value="600"/>
+                            <Setter Target="DPFecha.Width" Value="600"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <TextBlock Grid.ColumnSpan="2" Style="{ThemeResource HeaderTextBlockStyle}" Text="Registrar un Nuevo Jugador" HorizontalAlignment="Center"/>
+            <Image x:Name="ImgSkin" Source="Assets/Skin_Placeholder.png" Grid.RowSpan="7" Width="250" Height="256" VerticalAlignment="Center"/>
 
-        <TextBox x:Name="TxtNombre" Grid.Column="1" Grid.Row="1" Header="Nombre" Width="600" Margin="16"/>
+            <TextBlock Grid.ColumnSpan="2" Style="{ThemeResource HeaderTextBlockStyle}" Text="Registrar un Nuevo Jugador" HorizontalAlignment="Center"/>
 
-        <ComboBox x:Name="CBSkin" ItemsSource="{x:Bind cbItems}" Grid.Column="1" Grid.Row="2" Header="Skin" Margin="16" Width="600" SelectionChanged="CBSkin_SelectionChanged"/>
+            <TextBox x:Name="TxtNombre" Grid.Column="1" Grid.Row="1" Header="Nombre" Width="600" Margin="16"/>
 
-        <ComboBox x:Name="CBRango" ItemsSource="{x:Bind cbRangos}" Grid.Column="1" Grid.Row="3" Header="Rango" Margin="16" Width="600"/>
+            <ComboBox x:Name="CBSkin" ItemsSource="{x:Bind cbItems}" Grid.Column="1" Grid.Row="2" Header="Skin" Margin="16" Width="Auto" SelectionChanged="CBSkin_SelectionChanged"/>
 
-        <TextBox x:Name="TxtDinero" Grid.Column="1" Grid.Row="4" Header="Dinero" Width="600" Margin="16" InputScope="Number"/>
+            <ComboBox x:Name="CBRango" ItemsSource="{x:Bind cbRangos}" Grid.Column="1" Grid.Row="3" Header="Rango" Margin="16" Width="Auto"/>
 
-        <DatePicker x:Name="DPFecha" Grid.Column="1" Grid.Row="5" Header="Fecha de Ingreso" Margin="16" Width="600"/>
+            <TextBox x:Name="TxtDinero" Grid.Column="1" Grid.Row="4" Header="Dinero (diamantes)" Width="Auto" Margin="16" InputScope="Number" PlaceholderText="0"/>
 
-        <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Margin="16" Click="Button_Click_Cancelar">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE711;"/>
-                    <TextBlock Text="Cancelar"/>
-                </StackPanel>
-            </Button>
-            <Button x:Name="BtnAgregar" Margin="16" Click="Button_Click_Registrar">
-                <StackPanel Orientation="Horizontal">
-                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;"/>
-                    <TextBlock Text="Agregar"/>
-                </StackPanel>
-            </Button>
-        </StackPanel>
+            <DatePicker x:Name="DPFecha" Grid.Column="1" Grid.Row="5" Header="Fecha de Ingreso" Margin="16" Width="Auto"/>
 
-    </Grid>
+            <StackPanel Grid.Column="1" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Margin="16" Click="Button_Click_Cancelar">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE711;"/>
+                        <TextBlock Text="Cancelar"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="BtnAgregar" Margin="16" Click="Button_Click_Registrar">
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE710;"/>
+                        <TextBlock Text="Agregar"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>

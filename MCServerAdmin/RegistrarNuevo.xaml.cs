@@ -89,6 +89,7 @@ namespace MCServerAdmin
             if (TxtNombre.Text.Trim().Equals(""))
             {
                 TxtNombre.PlaceholderText = "Escribe un nombre";
+                TxtNombre.Text = "";
             }
 			else if (CBSkin.SelectedIndex<0)
 			{
@@ -96,25 +97,20 @@ namespace MCServerAdmin
 			}
 			else if (CBRango.SelectedIndex<0)
 			{
-				CBRango.PlaceholderText = "Elige un Rango";
+				CBRango.PlaceholderText = "Elige el Rango del usuario";
 			}
 			else
 			{
 				DateTime fecha = DPFecha.Date.UtcDateTime;
                 try
                 {
-                    int dinero = -1;
-                    if (TxtDinero.Text.Equals(""))
+                    int dinero = 0;
+                    try
                     {
-                        dinero = 0;
+                        dinero = Int32.Parse(TxtDinero.Text);
                     }
-                    else
-                    {
-                        try
-                        {
-                            dinero = Int32.Parse(TxtDinero.Text);
-                        }
-                        catch { }
+                    catch {
+
                     }
                     
                     Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString() + ".Skin.png", (Rango)(CBRango.SelectedItem),

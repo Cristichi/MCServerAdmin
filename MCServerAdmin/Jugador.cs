@@ -5,8 +5,8 @@ using Microsoft.Data.Sqlite;
 
 namespace MCServerAdmin.datos
 {
-	class Jugador
-	{
+	class Jugador : IComparable<Jugador>
+    {
 		public string Nombre { get; set; }
 		public string Skin { get; set; }
 		public Rango Rango { get; set; }
@@ -53,7 +53,12 @@ namespace MCServerAdmin.datos
 		{
 			return "[" + Rango + "] "+Nombre;
 		}
-	}
+
+        public int CompareTo(Jugador other)
+        {
+            return Nombre.CompareTo(other.Nombre);
+        }
+    }
 
 	enum Rango
 	{
@@ -130,6 +135,8 @@ namespace MCServerAdmin.datos
 					}
 					db.Close();
 				}
+
+                Lista.Sort();
 			}
 			
 			return Lista;

@@ -75,13 +75,31 @@ namespace MCServerAdmin
 			}
 		}
 
-		private void BtnBorrarJug_Click(object sender, RoutedEventArgs e)
+        private async void MostrarConfirmarBorrar(int index)
+        {
+            Jugador objetivo = ListaJugadores.ElementAt(index);
+            ContentDialog confirmarDialog = new ContentDialog
+            {
+                Title = "¿Borrar definitivamente a " + objetivo.Nombre + "?",
+                Content = "Esta acción no podrá deshacerse y el cambio se guardará inmediatamente.",
+                PrimaryButtonText = "Borrar definitivamente",
+                SecondaryButtonText = "Cancelar"
+            };
+
+            ContentDialogResult result = await confirmarDialog.ShowAsync();
+            if (result.Equals(ContentDialogResult.Primary))
+            {
+                AdminJugs.GetJugadores().Remove(objetivo);
+                AdminJugs.GuardarJugadores();
+                GVVerJugs.ItemsSource = AdminJugs.GetJugadores();
+                Frame.Navigate(typeof(VerJugadores));
+                Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+            }
+        }
+
+        private void BtnBorrarJug_Click(object sender, RoutedEventArgs e)
 		{
-			AdminJugs.GetJugadores().RemoveAt(GVVerJugs.SelectedIndex);
-			AdminJugs.GuardarJugadores();
-			GVVerJugs.ItemsSource = AdminJugs.GetJugadores();
-			Frame.Navigate(typeof(VerJugadores));
-			Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+            MostrarConfirmarBorrar(GVVerJugs.SelectedIndex);
 		}
 
 		private void BtnEditarJug_Editar(object sender, RoutedEventArgs e)
@@ -102,14 +120,26 @@ namespace MCServerAdmin
 				List<Jugador> Busca = new List<Jugador>();
 				foreach (Jugador Candy in AdminJugs.GetJugadores())
 				{
-					if (Candy.Nombre.Contains(ASBBuscar.Text))
+					if (Candy.ToString().Contains(ASBBuscar.Text))
 					{
 						Busca.Add(Candy);
 					}
 				}
 				sender.ItemsSource = Busca;
-			}
-		}
+                if (Busca.Count > 0)
+                {
+                    //GVVerJugs.ItemsSource = Busca;
+                    ListaJugadores = Busca;
+                    GVVerJugs.ItemsSource = ListaJugadores;
+                }
+                else
+                {
+                    ListaJugadores = AdminJugs.GetJugadores();
+                    GVVerJugs.ItemsSource = ListaJugadores;
+                }
+            }
+
+        }
 
 		private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
 		{
@@ -119,17 +149,41 @@ namespace MCServerAdmin
 
 		private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
 		{
+            /*
+            string buscando = ASBBuscar.Text;
+            List<Jugador> Busca = new List<Jugador>();
+            foreach (Jugador Candy in AdminJugs.GetJugadores())
+            {
+                if (Candy.ToString().Contains(buscando))
+                { 
+                    Busca.Add(Candy);
+                }
+            }
+            if (Busca.Count>0)
+            {
+                GVVerJugs.ItemsSource = Busca;
+            }
+            else
+            {
+                GVVerJugs.ItemsSource = AdminJugs.GetJugadores();
+                ASBBuscar.Text = "";
+            }*/
+
+            /*
 			if (args.ChosenSuggestion != null)
 			{
 				// User selected an item from the suggestion list, take an action on it here.
+
 			}
 			else
 			{
-				// Use args.QueryText to determine what to do.
+                // Use args.QueryText to determine what to do.
+                string buscado = args.QueryText;
 			}
-		}
+            */
+        }
 
-		private void Grid_Loaded(object sender, RoutedEventArgs e)
+        private void Grid_Loaded(object sender, RoutedEventArgs e)
 		{
 			SolidColorBrush borde = new SolidColorBrush(Windows.UI.Color.FromArgb(0, 0, 0, 0));
 			Grid grid = (Grid)sender;
