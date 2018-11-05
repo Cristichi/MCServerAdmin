@@ -30,7 +30,7 @@ namespace MCServerAdmin
 		ObservableCollection<String> cbItems = new ObservableCollection<String>();
 		ObservableCollection<Rango> cbRangos = new ObservableCollection<Rango>();
         
-		int index = -1;
+		Jugador editando;
 		public RegistrarNuevo()
 		{
 			this.InitializeComponent();
@@ -58,16 +58,15 @@ namespace MCServerAdmin
 				}
 			}
 
-            if (index >= 0)
+            if (editando!=null)
             {
                 try
                 {
-                    Jugador jug = AdminJugs.GetJugadores().ElementAt(index);
                     bool elegida = false;
                     int i;
                     for (i = 0; i < cbItems.Count && !elegida; i++)
                     {
-                        if (jug.Skin.Contains(cbItems.ElementAt(i)))
+                        if (editando.Skin.Contains(cbItems.ElementAt(i)))
                         {
                             CBSkin.SelectedIndex = i;
                             elegida = true;
@@ -115,17 +114,18 @@ namespace MCServerAdmin
                     
                     Jugador Nuevo = new Jugador(TxtNombre.Text, "Assets/" + CBSkin.SelectedItem.ToString() + ".Skin.png", (Rango)(CBRango.SelectedItem),
                     dinero, fecha.Day, fecha.Month, fecha.Year);
-                    if (index < 0)
+                    if (editando==null)
                     {
                         AdminJugs.GetJugadores().Add(Nuevo);
                     }
                     else
                     {
-                        AdminJugs.GetJugadores().RemoveAt(index);
+                        int index = AdminJugs.GetJugadores().IndexOf(editando);
                         AdminJugs.GetJugadores().Insert(index, Nuevo);
+                        AdminJugs.GetJugadores().Remove(editando);
                     }
                     AdminJugs.GuardarJugadores();
-                    Frame.Navigate(typeof(NuevoJugRegistrado), (index < 0 ? 0 : 1) + Nuevo.Nombre);
+                    Frame.Navigate(typeof(NuevoJugRegistrado), (editando == null ? 0 : 1) + Nuevo.Nombre);
                     Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
                 }
                 catch(Exception error)
@@ -152,15 +152,14 @@ namespace MCServerAdmin
         {
             try
             {
-                index = Int32.Parse(e.Parameter.ToString());
+                editando = (Jugador) e.Parameter;
 
                 //Editando jugador
-                Jugador jug = AdminJugs.GetJugadores().ElementAt(index);
-                TxtNombre.Text = jug.Nombre;
+                TxtNombre.Text = editando.Nombre;
 
                 try
                 {
-                    CBRango.SelectedItem = jug.Rango;
+                    CBRango.SelectedItem = editando.Rango;
                 }
                 catch
                 {
@@ -168,13 +167,13 @@ namespace MCServerAdmin
 
                 try
                 {
-                    DPFecha.Date = jug.FechaIngreso;
+                    DPFecha.Date = editando.FechaIngreso;
                 }
                 catch
                 {
                 }
 
-                TxtDinero.Text = jug.DineroVirtual + "";
+                TxtDinero.Text = editando.DineroVirtual + "";
                 BtnAgregar.Content = "Aplicar";
             }
             catch

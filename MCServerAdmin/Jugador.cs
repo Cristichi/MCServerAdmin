@@ -56,7 +56,12 @@ namespace MCServerAdmin.datos
 
         public int CompareTo(Jugador other)
         {
-            return Nombre.CompareTo(other.Nombre);
+            int sol = (AdminJugs.GetIdRango(other.Rango).CompareTo(AdminJugs.GetIdRango(Rango)));
+            if (sol == 0)
+            {
+                sol = Nombre.CompareTo(other.Nombre);
+            }
+            return sol;
         }
     }
 

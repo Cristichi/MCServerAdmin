@@ -50,7 +50,7 @@
                 SuggestionChosen="AutoSuggestBox_SuggestionChosen"/>
         </StackPanel>
 
-        <StackPanel x:Name="SPHerramientasJug" Grid.RowSpan="2" Visibility="Collapsed" MaxWidth="300">
+        <StackPanel x:Name="SPHerramientasJug" Grid.RowSpan="2" Visibility="Collapsed" Width="300">
             <TextBlock x:Name="TxtNombre" HorizontalAlignment="Left" Style="{ThemeResource SubheaderTextBlockStyle}" TextWrapping="Wrap"/>
             <TextBlock x:Name="TxtRango" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
             <TextBlock x:Name="TxtFecha" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
