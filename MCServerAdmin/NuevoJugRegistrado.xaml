@@ -10,7 +10,7 @@
 
     <RelativePanel>
         <TextBlock x:Name="TxtNuevoJug" Style="{ThemeResource HeaderTextBlockStyle}" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"/>
-        <Button RelativePanel.Below="TxtNuevoJug" VerticalAlignment="Center" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,40,0,0" Click="Button_Click_OK">
+        <Button RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,0,0,40" Click="Button_Click_OK">
             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEC61;"/>
         </Button>
     </RelativePanel>
