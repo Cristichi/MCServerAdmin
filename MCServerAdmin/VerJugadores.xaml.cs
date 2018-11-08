@@ -127,11 +127,16 @@ namespace MCServerAdmin
                     }
                 }
                 sender.ItemsSource = Busca;
+
                 if (Busca.Count > 0)
                 {
                     //GVVerJugs.ItemsSource = Busca;
-                    ListaJugadores = Busca;
-                    GVVerJugs.ItemsSource = ListaJugadores;
+
+                    if (ListaJugadores.Count != Busca.Count)
+                    {
+                        ListaJugadores = Busca;
+                        GVVerJugs.ItemsSource = ListaJugadores;
+                    }
                 }
                 else
                 {
@@ -146,42 +151,36 @@ namespace MCServerAdmin
         {
             // Set sender.Text. You can use args.SelectedItem to build your text string.
             sender.Text = args.SelectedItem.ToString();
+
+            List<Jugador> Busca = new List<Jugador>();
+            foreach (Jugador Candy in AdminJugs.GetJugadores())
+            {
+                if (Candy.ToString().Contains(ASBBuscar.Text))
+                {
+                    Busca.Add(Candy);
+                }
+            }
+            sender.ItemsSource = Busca;
+
+            if (Busca.Count > 0)
+            {
+                //GVVerJugs.ItemsSource = Busca;
+
+                if (ListaJugadores.Count != Busca.Count)
+                {
+                    ListaJugadores = Busca;
+                    GVVerJugs.ItemsSource = ListaJugadores;
+                }
+            }
+            else
+            {
+                ListaJugadores = AdminJugs.GetJugadores();
+                GVVerJugs.ItemsSource = ListaJugadores;
+            }
         }
 
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            /*
-            string buscando = ASBBuscar.Text;
-            List<Jugador> Busca = new List<Jugador>();
-            foreach (Jugador Candy in AdminJugs.GetJugadores())
-            {
-                if (Candy.ToString().Contains(buscando))
-                { 
-                    Busca.Add(Candy);
-                }
-            }
-            if (Busca.Count>0)
-            {
-                GVVerJugs.ItemsSource = Busca;
-            }
-            else
-            {
-                GVVerJugs.ItemsSource = AdminJugs.GetJugadores();
-                ASBBuscar.Text = "";
-            }*/
-
-            /*
-			if (args.ChosenSuggestion != null)
-			{
-				// User selected an item from the suggestion list, take an action on it here.
-
-			}
-			else
-			{
-                // Use args.QueryText to determine what to do.
-                string buscado = args.QueryText;
-			}
-            */
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
