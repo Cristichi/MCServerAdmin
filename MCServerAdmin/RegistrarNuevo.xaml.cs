@@ -175,6 +175,7 @@ namespace MCServerAdmin
 
                 TxtDinero.Text = editando.DineroVirtual + "";
                 BtnAgregar.Content = "Aplicar";
+                TxtTitulo.Text = "Editando a "+editando.Nombre;
             }
             catch
             {

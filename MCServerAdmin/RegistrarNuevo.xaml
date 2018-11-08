@@ -44,7 +44,7 @@
 
             <Image x:Name="ImgSkin" Source="Assets/Skin_Placeholder.png" Grid.RowSpan="7" Width="250" Height="256" VerticalAlignment="Center" animations:Connected.Key="item"/>
 
-            <TextBlock Grid.ColumnSpan="2" Style="{ThemeResource HeaderTextBlockStyle}" Text="Registrar un Nuevo Jugador" HorizontalAlignment="Center"/>
+            <TextBlock x:Name="TxtTitulo" Grid.ColumnSpan="2" Style="{ThemeResource HeaderTextBlockStyle}" Text="Registrar un Nuevo Jugador" HorizontalAlignment="Center"/>
 
             <TextBox x:Name="TxtNombre" Grid.Column="1" Grid.Row="1" Header="Nombre" Width="600" Margin="16"/>
 

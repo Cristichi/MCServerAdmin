@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <RelativePanel>
-        <TextBlock x:Name="TxtNuevoJug" Style="{ThemeResource HeaderTextBlockStyle}" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True"/>
+        <TextBlock x:Name="TxtNuevoJug" Style="{ThemeResource HeaderTextBlockStyle}" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Padding="20"/>
         <Button RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="0,0,0,40" Click="Button_Click_OK" animations:Connected.Key="item">
             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEC61;"/>
         </Button>

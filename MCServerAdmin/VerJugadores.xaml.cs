@@ -39,7 +39,7 @@ namespace MCServerAdmin
                 string nombre = jug.Nombre;
                 if (nombre.Length > 30)
                 {
-                    nombre = nombre.Substring(0, 27) + "...";
+                    nombre = nombre.Substring(0, 27).Trim() + "...";
                 }
                 TxtNombre.Text = "Jugador: " + nombre;
                 TxtRango.Text = "Rango: " + jug.Rango.ToString();
