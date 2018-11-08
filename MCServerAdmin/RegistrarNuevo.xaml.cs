@@ -100,7 +100,7 @@ namespace MCServerAdmin
 			}
 			else
 			{
-				DateTime fecha = DPFecha.Date.UtcDateTime;
+				DateTimeOffset fecha = DPFecha.Date;
                 try
                 {
                     int dinero = 0;

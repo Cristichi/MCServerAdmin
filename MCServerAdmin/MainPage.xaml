@@ -7,7 +7,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid AutomationProperties.Level="-3">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -21,7 +21,7 @@
             <AppBarButton x:Name="BtnForward" Icon="Forward" Label="Adelante" Click="AppBarButton_Click_Forward"/>
         </CommandBar>
 
-        <Image Source="Assets/minecraft_logo.png" Grid.Row="1" Width="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10"/>
+        <Image Source="Assets/minecraft_logo.png" Grid.Row="1" Width="50" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Canvas.ZIndex="1" />
 
         <Frame Grid.Row="1" x:Name="FramePrincipal" Navigated="FramePrincipal_Navigated"/>
     </Grid>
