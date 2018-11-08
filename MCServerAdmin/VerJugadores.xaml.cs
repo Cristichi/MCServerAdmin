@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
@@ -92,7 +93,7 @@ namespace MCServerAdmin
                 AdminJugs.GetJugadores().Remove(objetivo);
                 AdminJugs.GuardarJugadores();
                 GVVerJugs.ItemsSource = AdminJugs.GetJugadores();
-                Frame.Navigate(typeof(VerJugadores));
+                Frame.Navigate(typeof(VerJugadores), null, new SuppressNavigationTransitionInfo());
                 Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
             }
         }

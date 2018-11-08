@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:datos="using:MCServerAdmin.datos"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -55,7 +56,7 @@
             <TextBlock x:Name="TxtRango" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
             <TextBlock x:Name="TxtFecha" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
             <TextBlock x:Name="TxtDinero" HorizontalAlignment="Left" Style="{ThemeResource BaseTextBlockStyle}"/>
-            <Image x:Name="ImgImagen" Width="250" Height="256" Visibility="Collapsed"/>
+            <Image x:Name="ImgImagen" Width="250" Height="256" Visibility="Collapsed" animations:Connected.Key="item"/>
             <MenuFlyoutSeparator/>
             <StackPanel Orientation="Horizontal">
                 <AppBarButton x:Name="BtnBorrarJug" Content="Borrar" HorizontalAlignment="Stretch" Click="BtnBorrarJug_Click"/>

@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using DataAccessLib;
 using Microsoft.Data.Sqlite;
 using MCServerAdmin.datos;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace MCServerAdmin
 {
@@ -118,7 +119,7 @@ namespace MCServerAdmin
 
 		private void AppBarButton_Click_NuevoJugador(object sender, RoutedEventArgs e)
 		{
-			FramePrincipal.Navigate(typeof(RegistrarNuevo));
+			FramePrincipal.Navigate(typeof(RegistrarNuevo), null, new DrillInNavigationTransitionInfo());
 		}
 	}
 }

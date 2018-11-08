@@ -5,6 +5,7 @@
     xmlns:local="using:MCServerAdmin"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -41,7 +42,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Image x:Name="ImgSkin" Source="Assets/Skin_Placeholder.png" Grid.RowSpan="7" Width="250" Height="256" VerticalAlignment="Center"/>
+            <Image x:Name="ImgSkin" Source="Assets/Skin_Placeholder.png" Grid.RowSpan="7" Width="250" Height="256" VerticalAlignment="Center" animations:Connected.Key="item"/>
 
             <TextBlock Grid.ColumnSpan="2" Style="{ThemeResource HeaderTextBlockStyle}" Text="Registrar un Nuevo Jugador" HorizontalAlignment="Center"/>
 
